@@ -1,0 +1,53 @@
+{
+  "name": "elisa-driver-validator",
+  "version": "0.1.0",
+  "description": "Validate an Elisa driver.",
+  "homepage": "http://elisajs.org",
+  "author": {
+    "name": "Justo Labs",
+    "email": "info@justolabs.com",
+    "url": "http://elisajs.org"
+  },
+  "contributors": [
+    {
+      "name": "Raúl G. González",
+      "email": "raulggonzalez@elisajs.org",
+      "url": ""
+    }
+  ],
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/elisajs/elisa-driver-validator/issues",
+    "email": "issues@elisajs.org"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/elisajs/elisa-driver-validator.git"
+  },
+  "engines": {
+    "node": ">= 5.0.0",
+    "npm": ">= 3.0.0"
+  },
+  "dependencies": {
+    "elisa": "*"
+  },
+  "peerDependencies": {},
+  "devDependencies": {
+    "babel-preset-es2015": "*",
+    "justo": "*",
+    "justo-assert": "*",
+    "justo-plugin-babel": "*",
+    "justo-plugin-fs": "*",
+    "justo-plugin-jshint": "*",
+    "justo-plugin-npm": "*"
+  },
+  "preferGlobal": false,
+  "main": "index.js",
+  "files": [
+    "lib/",
+    "data/"
+  ],
+  "scripts": {
+    "test": "justo test"
+  }
+}
