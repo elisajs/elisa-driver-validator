@@ -436,4 +436,317 @@ var _justo = require("justo");function _interopRequireDefault(obj) {return obj &
 
 
       (0, _justo.test)("hasStore(ns, unknown) : false", function () {
-        db.hasStore("test", "unknown").must.be.eq(false);});});});});
+        db.hasStore("test", "unknown").must.be.eq(false);});});});
+
+
+
+
+  (0, _justo.suite)("Collection", function () {
+    (0, _justo.suite)("#getCollection()", function () {
+      (0, _justo.test)("getCollection(name) : Collection", function () {
+        var ds = db.getCollection("bandits");
+
+        ds.must.be.instanceOf(_elisa.Collection);
+        ds.must.have({ 
+          name: "bandits", 
+          qn: "bandits", 
+          fqn: "elisa.bandits", 
+          inject: undefined });
+
+        ds.db.must.be.same(db);});
+
+
+      (0, _justo.test)("getCollection('unknown') : Collection", function () {
+        var ds = db.getCollection("unknown");
+
+        ds.must.be.instanceOf(_elisa.Collection);
+        ds.must.have({ 
+          name: "unknown", 
+          qn: "unknown", 
+          fqn: "elisa.unknown", 
+          inject: undefined });
+
+        ds.db.must.be.same(db);});
+
+
+      (0, _justo.test)("getCollection(collection, {inject}) : Collection", function () {
+        var ds = db.getCollection("bandits", { inject: { userId: 123 } });
+
+        ds.must.be.instanceOf(_elisa.Collection);
+        ds.must.have({ 
+          name: "bandits", 
+          qn: "bandits", 
+          fqn: "elisa.bandits", 
+          inject: { userId: 123 } });
+
+        ds.db.must.be.same(db);});
+
+
+      (0, _justo.test)("getCollection('unknown', {inject}) : Collection", function () {
+        var ds = db.getCollection("unknown", { inject: { userId: 123 } });
+
+        ds.must.be.instanceOf(_elisa.Collection);
+        ds.must.have({ 
+          name: "unknown", 
+          qn: "unknown", 
+          fqn: "elisa.unknown", 
+          inject: { userId: 123 } });
+
+        ds.db.must.be.same(db);});
+
+
+      (0, _justo.test)("getCollection(ns, store) : Collection", function () {
+        var ds = db.getCollection("test", "bands");
+
+        ds.must.be.instanceOf(_elisa.Collection);
+        ds.must.have({ 
+          name: "bands", 
+          qn: "test.bands", 
+          fqn: "elisa.test.bands", 
+          inject: undefined });
+
+        ds.db.must.be.same(db);});
+
+
+      (0, _justo.test)("getCollection('unknown', 'unknown') : Collection", function () {
+        var ds = db.getCollection("unknown", "unknown");
+
+        ds.must.be.instanceOf(_elisa.Collection);
+        ds.must.have({ 
+          name: "unknown", 
+          qn: "unknown.unknown", 
+          fqn: "elisa.unknown.unknown", 
+          inject: undefined });
+
+        ds.db.must.be.same(db);});
+
+
+      (0, _justo.test)("getCollection('unknown', coll) : Collection", function () {
+        var ds = db.getCollection("unknown", "bands");
+
+        ds.must.be.instanceOf(_elisa.Collection);
+        ds.must.have({ 
+          name: "bands", 
+          qn: "unknown.bands", 
+          fqn: "elisa.unknown.bands", 
+          inject: undefined });
+
+        ds.db.must.be.same(db);});
+
+
+      (0, _justo.test)("getCollection(ns, 'unknown') : Collection", function () {
+        var ds = db.getCollection("test", "unknown");
+
+        ds.must.be.instanceOf(_elisa.Collection);
+        ds.must.have({ 
+          name: "unknown", 
+          qn: "test.unknown", 
+          fqn: "elisa.test.unknown", 
+          inject: undefined });
+
+        ds.db.must.be.same(db);});
+
+
+      (0, _justo.test)("getCollection(ns, coll, {inject}) : Collection", function () {
+        var ds = db.getCollection("test", "bands", { inject: { userId: 321 } });
+
+        ds.must.be.instanceOf(_elisa.Collection);
+        ds.must.have({ 
+          name: "bands", 
+          qn: "test.bands", 
+          fqn: "elisa.test.bands", 
+          inject: { userId: 321 } });
+
+        ds.db.must.be.same(db);});
+
+
+      (0, _justo.test)("getCollection(qn) : Collection", function () {
+        var ds = db.getCollection("test.bands");
+
+        ds.must.be.instanceOf(_elisa.Collection);
+        ds.must.have({ 
+          name: "bands", 
+          qn: "test.bands", 
+          fqn: "elisa.test.bands", 
+          inject: undefined });
+
+        ds.db.must.be.same(db);});
+
+
+      (0, _justo.test)("getCollection(qn, {inject}) : Collection", function () {
+        var ds = db.getCollection("test.bands", { inject: { userId: 123 } });
+
+        ds.must.be.instanceOf(_elisa.Collection);
+        ds.must.have({ 
+          name: "bands", 
+          qn: "test.bands", 
+          fqn: "elisa.test.bands", 
+          inject: { userId: 123 } });
+
+        ds.db.must.be.same(db);});});
+
+
+
+    (0, _justo.suite)("#findCollection()", function () {
+      (0, _justo.test)("findCollection(coll) : Collection", function () {
+        var ds = db.findCollection("bandits");
+
+        ds.must.be.instanceOf(_elisa.Collection);
+        ds.must.have({ 
+          name: "bandits", 
+          qn: "bandits", 
+          fqn: "elisa.bandits", 
+          inject: undefined });
+
+        ds.db.must.be.same(db);});
+
+
+      (0, _justo.test)("findCollection('unknown') : undefined", function () {
+        (0, _assert2.default)(db.findCollection("unknown") === undefined);});
+
+
+      (0, _justo.test)("findCollection(coll, {inject}) : Collection", function () {
+        var ds = db.findCollection("bandits", { inject: { userId: 123 } });
+
+        ds.must.be.instanceOf(_elisa.Collection);
+        ds.must.have({ 
+          name: "bandits", 
+          qn: "bandits", 
+          fqn: "elisa.bandits", 
+          inject: { userId: 123 } });
+
+        ds.db.must.be.same(db);});
+
+
+      (0, _justo.test)("findCollection('unknown', {inject}) : undefined", function () {
+        (0, _assert2.default)(db.findCollection("unknown", { inject: { userId: 123 } }) === undefined);});
+
+
+      (0, _justo.test)("findCollection(ns, coll) : Collection", function () {
+        var ds = db.findCollection("test", "bands");
+
+        ds.must.be.instanceOf(_elisa.Collection);
+        ds.must.have({ 
+          name: "bands", 
+          qn: "test.bands", 
+          fqn: "elisa.test.bands", 
+          inject: undefined });
+
+        ds.db.must.be.same(db);});
+
+
+      (0, _justo.test)("findCollection('unknown', 'unknown') : undefined", function () {
+        (0, _assert2.default)(db.findCollection("unknown", "unknown") === undefined);});
+
+
+      (0, _justo.test)("findCollection('unknown', store) : undefined", function () {
+        (0, _assert2.default)(db.findCollection("unknown", "bands") === undefined);});
+
+
+      (0, _justo.test)("findCollection(ns, 'unknown') : undefined", function () {
+        (0, _assert2.default)(db.findCollection("test", "unknown") === undefined);});
+
+
+      (0, _justo.test)("findCollection(ns, coll, {inject}) : Collection", function () {
+        var ds = db.findCollection("test", "bands", { inject: { userId: 321 } });
+
+        ds.must.be.instanceOf(_elisa.Collection);
+        ds.must.have({ 
+          name: "bands", 
+          qn: "test.bands", 
+          fqn: "elisa.test.bands", 
+          inject: { userId: 321 } });
+
+        ds.db.must.be.same(db);});
+
+
+      (0, _justo.test)("findCollection('ns.coll') : Collection", function () {
+        var ds = db.findCollection("test.bands");
+
+        ds.must.be.instanceOf(_elisa.Collection);
+        ds.must.have({ 
+          name: "bands", 
+          qn: "test.bands", 
+          fqn: "elisa.test.bands", 
+          inject: undefined });
+
+        ds.db.must.be.same(db);});
+
+
+      (0, _justo.test)("findCollection('unknown.unknown') : undefined", function () {
+        (0, _assert2.default)(db.findCollection("unkNs.unkStore") === undefined);});
+
+
+      (0, _justo.test)("findCollection('unknown.store') : undefined", function () {
+        (0, _assert2.default)(db.findCollection("unknown.bandits") === undefined);});
+
+
+      (0, _justo.test)("findCollection('ns.unknown') : undefined", function () {
+        (0, _assert2.default)(db.findCollection("test.unknown") === undefined);});
+
+
+      (0, _justo.test)("findCollection('ns.store', {inject}) : Collection", function () {
+        var ds = db.findCollection("test.bands", { inject: { userId: 123 } });
+
+        ds.must.be.instanceOf(_elisa.Collection);
+        ds.must.have({ 
+          name: "bands", 
+          qn: "test.bands", 
+          fqn: "elisa.test.bands", 
+          inject: { userId: 123 } });
+
+        ds.db.must.be.same(db);});
+
+
+      (0, _justo.test)("findCollection('unknown.unknown', {inject}) : undefined", function () {
+        (0, _assert2.default)(db.findCollection("unknown.unknown", { inject: { userId: 123 } }) === undefined);});
+
+
+      (0, _justo.test)("findCollection('unknown.coll', {inject}) : undefined", function () {
+        (0, _assert2.default)(db.findCollection("unknown.bandits", { inject: { userId: 123 } }) === undefined);});
+
+
+      (0, _justo.test)("findCollection('ns.unknown', {inject}) : undefined", function () {
+        (0, _assert2.default)(db.findCollection("test.unknown", { inject: { userId: 123 } }) === undefined);});});
+
+
+
+    (0, _justo.suite)("#hasCollection()", function () {
+      (0, _justo.test)("hasCollection(ds) : true", function () {
+        db.hasCollection("bandits").must.be.eq(true);});
+
+
+      (0, _justo.test)("hasCollection(ds) : false", function () {
+        db.hasCollection("unknown").must.be.eq(false);});
+
+
+      (0, _justo.test)("hasCollection('ns.ds') : true", function () {
+        db.hasCollection("test.bands").must.be.eq(true);});
+
+
+      (0, _justo.test)("hasCollection('unknown.unknown') : false", function () {
+        db.hasCollection("unknown.unknown").must.be.eq(false);});
+
+
+      (0, _justo.test)("hasCollection('unknown.ds') : false", function () {
+        db.hasCollection("unknown.bands").must.be.eq(false);});
+
+
+      (0, _justo.test)("hasCollection('ns.unknown') : false", function () {
+        db.hasCollection("test.unknown").must.be.eq(false);});
+
+
+      (0, _justo.test)("hasCollection(ns, ds) : true", function () {
+        db.hasCollection("test", "bands").must.be.eq(true);});
+
+
+      (0, _justo.test)("hasCollection(unknown, unknown) : false", function () {
+        db.hasCollection("unknown", "unknown").must.be.eq(false);});
+
+
+      (0, _justo.test)("hasCollection(unknown, ds) : false", function () {
+        db.hasCollection("unknown", "bands").must.be.eq(false);});
+
+
+      (0, _justo.test)("hasCollection(ns, unknown) : false", function () {
+        db.hasCollection("test", "unknown").must.be.eq(false);});});});});

@@ -3,4 +3,6 @@
     default;} });var _Namespace = require("./lib/Namespace");Object.defineProperty(exports, "validateNamespace", { enumerable: true, get: function get() {return _interopRequireDefault(_Namespace).
     default;} });var _Server = require("./lib/Server");Object.defineProperty(exports, "validateServer", { enumerable: true, get: function get() {return _interopRequireDefault(_Server).
     default;} });var _Store = require("./lib/Store");Object.defineProperty(exports, "validateStore", { enumerable: true, get: function get() {return _interopRequireDefault(_Store).
+    default;} });var _Collection = require("./lib/Collection");Object.defineProperty(exports, "validateCollection", { enumerable: true, get: function get() {return _interopRequireDefault(_Collection).
+    default;} });var _CollectionQuery = require("./lib/CollectionQuery");Object.defineProperty(exports, "validateCollectionQuery", { enumerable: true, get: function get() {return _interopRequireDefault(_CollectionQuery).
     default;} });function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}

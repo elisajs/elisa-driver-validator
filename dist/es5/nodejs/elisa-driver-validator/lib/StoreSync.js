@@ -195,4 +195,56 @@ var _store = require("../data/store");function _interopRequireDefault(obj) {retu
     (0, _justo.test)("update({id}, fields) - id existing", function () {
       store.update({ id: _store.BANDS[0].id }, { x: 123, year: { $inc: 1 } });
       store.count().must.be.eq(_store.BANDS.length);
-      store.findAll().docs.must.be.similarTo([Object.assign({}, _store.BANDS[0], { x: 123, year: _store.BANDS[0].year + 1 })].concat(_store.BANDS.slice(1)));});});});
+      store.findAll().docs.must.be.similarTo([Object.assign({}, _store.BANDS[0], { x: 123, year: _store.BANDS[0].year + 1 })].concat(_store.BANDS.slice(1)));});});
+
+
+
+  (0, _justo.suite)("#save()", function () {
+    (0, _justo.suite)("Error handler", function () {
+      (0, _justo.test)("save(doc) - without id", function () {
+        store.save.bind(store).must.raise(Error, [{ x: 1, y: 2 }]);});
+
+
+      (0, _justo.test)("save(doc, opts) - without id", function () {
+        store.save.bind(store).must.raise(Error, [{ x: 1, y: 2 }, {}]);});});
+
+
+
+    (0, _justo.suite)("Insert", function () {
+      (0, _justo.test)("save(doc)", function () {
+        store.save(_store.ECHO);
+        store.findAll().docs.must.be.similarTo(_store.BANDS.concat(_store.ECHO));});
+
+
+      (0, _justo.test)("save(doc, opts)", function () {
+        store.save(_store.ECHO, {});
+        store.findAll().docs.must.be.similarTo(_store.BANDS.concat(_store.ECHO));});});
+
+
+
+    (0, _justo.suite)("Update", function () {
+      (0, _justo.test)("save(doc)", function () {
+        var band = Object.assign({}, _store.BANDS[0], { origin: "Jamaica" });
+        store.save(band);
+        store.findAll().docs.must.be.similarTo([band].concat(_store.BANDS.slice(1)));});
+
+
+      (0, _justo.test)("save(doc, opts)", function () {
+        var band = Object.assign({}, _store.BANDS[0], { origin: "Jamaica" });
+        store.save(band, {});
+        store.findAll().docs.must.be.similarTo([band].concat(_store.BANDS.slice(1)));});});});
+
+
+
+
+  (0, _justo.suite)("Injection", function () {
+    (0, _justo.test)("insert(doc)", function () {
+      var band = Object.assign({}, _store.ECHO, { author: "elisa" });
+      db.getStore(bandsStore, { inject: { author: "elisa" } }).insert(band);
+      store.findAll().docs.must.be.similarTo(_store.BANDS.concat([band]));});
+
+
+    (0, _justo.test)("save(doc)", function () {
+      var band = Object.assign({}, _store.ECHO, { author: "elisa" });
+      db.getStore(bandsStore, { inject: { author: "elisa" } }).save(band);
+      store.findAll().docs.must.be.similarTo(_store.BANDS.concat([band]));});});});
